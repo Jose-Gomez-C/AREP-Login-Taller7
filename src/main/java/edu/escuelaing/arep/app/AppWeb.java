@@ -4,6 +4,7 @@ import static spark.Spark.get;
 import static spark.Spark.port;
 import static spark.Spark.post;
 import static spark.Spark.staticFiles;
+import static spark.Spark.secure;
 
 import org.apache.commons.io.FileUtils;
 
@@ -15,22 +16,19 @@ import java.nio.charset.StandardCharsets;
  *
  */
 public class AppWeb {
-	/**
-	 * Metodo encargado de hacer el llamado html, enviar y recibir datos. 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		port(getPort());
-		staticFiles.location("/public");
-		post("/calculadora", (request, response) -> {			
-			return "OK";
-		});
-	}
-	public static int getPort(){
-		if (System.getenv("PORT") != null) {
-			return Integer.parseInt(System.getenv("PORT"));
-		}
-		return 4567; 
-	}
+	
+    public static void main(String[] args) {
+        port(getPort());
+        staticFiles.location("/public");
+        secure("keystores/ecikeystore.p12", "Hola123", null, null);
+        get("/hello", (req, res) -> "Hello World");
+    }
+
+    static int getPort() {
+        if (System.getenv("PORT") != null) {
+            return Integer.parseInt(System.getenv("PORT"));
+        }
+        return 5000; //returns default port if heroku-port isn't set (i.e. on localhost) }
+    }
 }
 	
