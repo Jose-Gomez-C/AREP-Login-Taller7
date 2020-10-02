@@ -49,7 +49,7 @@ public class Httpclient {
 	     * @throws IOException si no se ecuentra las respuesta
 	     */
 	    public static String getInformacion() throws IOException {
-	        URL url = new URL("https://localhost:5001/respuesta");
+	        URL url = new URL("https:http://ec2-3-83-244-7.compute-1.amazonaws.com:8080/respuesta");
 	        HttpURLConnection con = (HttpURLConnection) url.openConnection();
 	        con.setRequestMethod("GET");
 	        con.setDoOutput(true);
