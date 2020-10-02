@@ -27,7 +27,7 @@ public class AppWeb {
 		usuarios.put("prueba@gmail.com", encriptar("1234"));
 		
 		secure("keystores/ecikeystore.p12", "Hola123", null, null);
-
+		Httpclient.conexion();
 		
 
 		before("protected/*", (req, response) -> {
@@ -55,7 +55,10 @@ public class AppWeb {
 		StaticFilesConfiguration staticHandler = new StaticFilesConfiguration();
 		staticHandler.configure("/public");
 		before((request, response) -> staticHandler.consume(request.raw(), response.raw()));
-
+		
+		get("/conexion", ((request, response) -> {
+			return Httpclient.getInformacion();
+		}));
 		get("/", ((request, response) -> {
 			response.redirect("/login.html");
 			return "Ok";
