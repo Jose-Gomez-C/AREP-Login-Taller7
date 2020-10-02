@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Built-By: root
-Build-Jdk: 13.0.4
-Main-Class: co.edu.escuelaing.sparksimpleexample.Server
-Created-By: Maven Integration for Eclipse
-
