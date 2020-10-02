@@ -30,23 +30,23 @@ public class AppWeb {
 		Httpclient.conexion();
 		
 
-		before("protected/*", (req, response) -> {
-			req.session(true);
-			if (req.session().isNew()) {
-				req.session().attribute("Loged", false);
+		before("protected/*", (request, response) -> {
+			request.session(true);
+			if (request.session().isNew()) {
+				request.session().attribute("isLogged", false);
 			}
-			boolean auth = req.session().attribute("Loged");
+			boolean auth = request.session().attribute("isLogged");
 			if (!auth) {
 				halt(401, "<h1>Usted no esta autorizado</h1>");
 			}
 		});
 
-		before("/login.html", ((req, response) -> {
-			req.session(true);
-			if (req.session().isNew()) {
-				req.session().attribute("Loged", false);
+		before("/login.html", ((request, response) -> {
+			request.session(true);
+			if (request.session().isNew()) {
+				request.session().attribute("isLogged", false);
 			}
-			boolean auth = req.session().attribute("Loged");
+			boolean auth = request.session().attribute("isLogged");
 			if (auth) {
 				response.redirect("protected/index.html");
 			}
@@ -75,7 +75,7 @@ public class AppWeb {
 			Usuario posibleUsurario = gson.fromJson(request.body(), Usuario.class);
 			if (encriptar(posibleUsurario.getPassword()).equals(usuarios.get(posibleUsurario.getName()))) {
 				request.session().attribute("User", posibleUsurario.getName());
-				request.session().attribute("Loged", true);
+				request.session().attribute("isLogged", true);
 			}
 			return "ok";
 		});
