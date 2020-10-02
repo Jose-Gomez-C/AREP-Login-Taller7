@@ -51,11 +51,10 @@ public class Httpclient {
 	    public static String getInformacion() throws IOException {
 	    	//https://ec2-3-83-244-7.compute-1.amazonaws.com:8081
 	    	//https://localhost:5001/respuesta
-	        URL url = new URL("https://ec2-3-83-244-7.compute-1.amazonaws.com:8081/respuesta");
+	        URL url = new URL("https://ec2-3-83-244-7.compute-1.amazonaws.com:5001/respuesta");
 	        HttpURLConnection con = (HttpURLConnection) url.openConnection();
 	        con.setRequestMethod("GET");
 	        con.setDoOutput(true);
-
 	        try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
 	            StringBuilder response = new StringBuilder();
 	            String responseLine = null;
